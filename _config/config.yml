@@ -1,0 +1,7 @@
+---
+Name: nextgenimages
+After:
+  - "silverstripe/framework#*"
+  - "silverstripe/assets#assetsimage"
+---
+#@TODO

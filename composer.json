@@ -1,0 +1,25 @@
+{
+    "name": "webbuilders-group/silverstripe-next-gen-images",
+    "description": "@TODO",
+    "type": "silverstripe-vendormodule",
+    "keywords": ["silverstripe", "image", "images", "webp"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Ed Chipman",
+            "homepage": "http://webbuildersgroup.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "silverstripe/assets": "~1.9"
+    },
+    "support": {
+        "issues": "https://github.com/webbuilders-group/silverstripe-next-gen-images/issues"
+    },
+    "autoload": {
+        "psr-4": {
+            "WebbuildersGroup\\NextGenImages\\": "src/"
+        }
+    }
+}
