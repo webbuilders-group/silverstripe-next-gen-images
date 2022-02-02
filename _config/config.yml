@@ -5,9 +5,6 @@ After:
   - "silverstripe/assets#assetsimage"
 ---
 SilverStripe\Core\Injector\Injector:
-  SilverStripe\Assets\Image_Backend:
-    class: 'WebbuildersGroup\NextGenImages\NextGenImagesBackend'
-    factory: '%$SilverStripe\Assets\ImageBackendFactory'
   SilverStripe\Assets\FilenameParsing\FileResolutionStrategy.public:
     properties:
       ResolutionFileIDHelpers:
@@ -19,6 +16,16 @@ SilverStripe\Core\Injector\Injector:
         - '%$WebbuildersGroup\NextGenImages\FilenameParsing\HashFileIDHelper'
         - '%$WebbuildersGroup\NextGenImages\FilenameParsing\NaturalFileIDHelper'
 
+SilverStripe\Assets\File:
+  allowed_extensions:
+    - 'webp'
+
 SilverStripe\Assets\Image:
   extensions:
     - 'WebbuildersGroup\NextGenImages\Extensions\ImageExtension'
+
+SilverStripe\Assets\Storage\DBFile:
+  extensions:
+    - 'WebbuildersGroup\NextGenImages\Extensions\ImageExtension'
+  supported_images:
+    - 'image/webp'
