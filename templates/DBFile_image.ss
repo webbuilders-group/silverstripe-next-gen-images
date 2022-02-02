@@ -1,4 +1,4 @@
 <picture>
-    <source srcset="$WebP.ATT" type="image/webp"/>
+    <source srcset="$WebP.Link" type="image/webp"/>
     <img $AttributesHTML />
 </picture>
