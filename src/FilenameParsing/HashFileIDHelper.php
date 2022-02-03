@@ -14,7 +14,7 @@ class HashFileIDHelper extends SS_HashFileIDHelper
     public function cleanFilename($filename)
     {
         $finalFilename = parent::cleanFilename($filename);
-        return preg_replace('/\.webp$/', '', $finalFilename);
+        return preg_replace('/(?<extension>(\..+)+)\.webp$/', '$1', $finalFilename);
     }
 
     /**
@@ -24,7 +24,7 @@ class HashFileIDHelper extends SS_HashFileIDHelper
      */
     public function parseFileID($fileID)
     {
-        $pattern = '#^(?<folder>([^/]+/)*)(?<hash>[a-f0-9]{10})/(?<basename>((?<!__)[^/.])+)(__(?<variant>[^.]+))?(?<extension>(\..+)*)\.webp$#';
+        $pattern = '#^(?<folder>([^/]+/)*)(?<hash>[a-f0-9]{10})/(?<basename>((?<!__)[^/.])+)(__(?<variant>[^.]+))?(?<extension>(\..+)+)\.webp$#';
 
         // not a valid file (or not a part of the filesystem)
         if (!preg_match($pattern, $fileID, $matches)) {
@@ -50,7 +50,7 @@ class HashFileIDHelper extends SS_HashFileIDHelper
     {
         $variant = $this->parseFileID($fileID);
         return $variant &&
-            preg_replace('/\.webp$/', '', $variant->getFilename()) == $original->getFilename() &&
+            preg_replace('/(?<extension>(\..+)+)\.webp$/', '$1', $variant->getFilename()) == $original->getFilename() &&
             $variant->getHash() == $this->truncate($original->getHash());
     }
 

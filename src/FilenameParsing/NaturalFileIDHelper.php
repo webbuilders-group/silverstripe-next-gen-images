@@ -14,7 +14,7 @@ class NaturalFileIDHelper extends SS_NaturalFileIDHelper
     public function cleanFilename($filename)
     {
         $finalFilename = parent::cleanFilename($filename);
-        return preg_replace('/\.webp$/', '', $finalFilename);
+        return preg_replace('/(?<extension>(\..+)+)\.webp$/', '$1', $finalFilename);
     }
 
     /**
@@ -24,7 +24,7 @@ class NaturalFileIDHelper extends SS_NaturalFileIDHelper
      */
     public function parseFileID($fileID)
     {
-        $pattern = '#^(?<folder>([^/]+/)*)(?<basename>((?<!__)[^/.])+)(__(?<variant>[^.]+))?(?<extension>(\..+)*)\.webp$#';
+        $pattern = '#^(?<folder>([^/]+/)*)(?<basename>((?<!__)[^/.])+)(__(?<variant>[^.]+))?(?<extension>(\..+)+)\.webp$#';
 
         // not a valid file (or not a part of the filesystem)
         if (!preg_match($pattern, $fileID, $matches) || strpos($matches['folder'], '_resampled') !== false) {
@@ -49,6 +49,6 @@ class NaturalFileIDHelper extends SS_NaturalFileIDHelper
     public function isVariantOf($fileID, ParsedFileID $original)
     {
         $variant = $this->parseFileID($fileID);
-        return $variant && preg_replace('/\.webp$/', '', $variant->getFilename()) == $original->getFilename();
+        return $variant && preg_replace('/(?<extension>(\..+)+)\.webp$/', '$1', $variant->getFilename()) == $original->getFilename();
     }
 }

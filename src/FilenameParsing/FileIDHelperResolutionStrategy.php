@@ -18,15 +18,15 @@ class FileIDHelperResolutionStrategy extends SS_FileIDHelperResolutionStrategy
     {
         $webp = false;
         if ($tuple instanceof ParsedFileID) {
-            if (preg_match('/(?<extension>(\..+)*)\.webp$/', $tuple->getFilename())) {
+            if (preg_match('/(?<extension>(\..+)+)\.webp$/', $tuple->getFilename())) {
                 $webp = true;
                 $tuple = $tuple
-                    ->setFilename(preg_replace('/(?<extension>(\..+)*)\.webp$/', '$1', $tuple->getFilename()));
+                    ->setFilename(preg_replace('/(?<extension>(\..+)+)\.webp$/', '$1', $tuple->getFilename()));
             }
         } else if (is_array($tuple)) {
-            if (preg_match('/(?<extension>(\..+)*)\.webp$/', $tuple['Filename'])) {
+            if (preg_match('/(?<extension>(\..+)+)\.webp$/', $tuple['Filename'])) {
                 $webp = true;
-                $tuple['Filename'] = preg_replace('/(?<extension>(\..+)*)\.webp$/', '$1', $tuple['Filename']);
+                $tuple['Filename'] = preg_replace('/(?<extension>(\..+)+)\.webp$/', '$1', $tuple['Filename']);
             }
         }
 
@@ -52,10 +52,10 @@ class FileIDHelperResolutionStrategy extends SS_FileIDHelperResolutionStrategy
     public function stripVariant($fileID)
     {
         $fileID = parent::stripVariant($fileID);
-        if ($fileID instanceof ParsedFileID && preg_match('/(?<extension>(\..+)*)\.webp$/', $fileID->getFileID())) {
+        if ($fileID instanceof ParsedFileID && preg_match('/(?<extension>(\..+)+)\.webp$/', $fileID->getFileID())) {
             $fileID = $fileID
-                ->setFileID(preg_replace('/(?<extension>(\..+)*)\.webp$/', '$1', $fileID->getFileID()))
-                ->setFilename(preg_replace('/(?<extension>(\..+)*)\.webp$/', '$1', $fileID->getFilename()));
+                ->setFileID(preg_replace('/(?<extension>(\..+)+)\.webp$/', '$1', $fileID->getFileID()))
+                ->setFilename(preg_replace('/(?<extension>(\..+)+)\.webp$/', '$1', $fileID->getFilename()));
         }
 
         return $fileID;
