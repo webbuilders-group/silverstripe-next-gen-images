@@ -19,13 +19,22 @@ use LogicException;
 class ImageExtension extends DataExtension
 {
     /**
+     * Detects if a file is a WebP image or not
+     * @return bool
+     */
+    public function getIsWebP()
+    {
+        return (preg_match('/\.webp$/', $this->owner->getFilename()) || $this->owner->getMimeType() == 'image/webp');
+    }
+
+    /**
      * Converts the current image to WebP
      * @return \SilverStripe\Assets\Storage\DBFile
      */
     public function getWebP()
     {
         //Do nothing we aleady appear to have a webp
-        if (preg_match('/\.webp$/', $this->owner->getFilename()) || $this->owner->getMimeType() == 'image/webp') {
+        if ($this->owner->getIsWebP()) {
             return $this->owner;
         }
 

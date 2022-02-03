@@ -1,4 +1,8 @@
-<picture>
-    <source srcset="$WebP.Link" type="image/webp"/>
+<% if not $IsWebP %>
+    <picture>
+        <source srcset="$WebP.Link" type="image/webp"/>
+        <img $AttributesHTML />
+    </picture>
+<% else %>
     <img $AttributesHTML />
-</picture>
+<% end_if %>
