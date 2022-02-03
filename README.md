@@ -6,7 +6,7 @@ Next Gen Images for Silverstripe
 * Ed Chipman ([UndefinedOffset](https://github.com/UndefinedOffset))
 
 ## Requirements
-* SilverStripe CMS 4.9+
+* [Silverstripe Assets](https://github.com/silverstripe/silverstripe-assets) 1.9+
 
 
 ## Installation
