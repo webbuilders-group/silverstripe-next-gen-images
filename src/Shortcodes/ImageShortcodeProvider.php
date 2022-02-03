@@ -90,7 +90,7 @@ class ImageShortcodeProvider extends SS_ImageShortcodeProvider
             return strlen(trim($v)) || $k === 'alt';
         }, ARRAY_FILTER_USE_BOTH);
 
-        if (!$record->getIsWebP()) {
+        if (!$record->getIsWebP() && $record->exists()) {
             $markup = HTML::createTag(
                 'picture',
                 [],
