@@ -1,6 +1,6 @@
 <% if not $IsWebP %>
     <picture>
-        <source srcset="$WebP.Link" type="image/webp"/>
+        <source srcset="$WebP.URL" type="image/webp"/>
         <img $AttributesHTML />
     </picture>
 <% else %>
