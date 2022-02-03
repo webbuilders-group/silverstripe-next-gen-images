@@ -1,8 +1,6 @@
 <?php
 namespace WebbuildersGroup\NextGenImages\Extensions;
 
-use Intervention\Image\AbstractDriver;
-use SilverStripe\Assets\Image;
 use SilverStripe\Assets\Image_Backend;
 use SilverStripe\Assets\Storage\AssetContainer;
 use SilverStripe\Assets\Storage\AssetStore;
@@ -21,11 +19,16 @@ use LogicException;
 class ImageExtension extends DataExtension
 {
     /**
-     * @TODO
+     * Converts the current image to WebP
      * @return \SilverStripe\Assets\Storage\DBFile
      */
     public function getWebP()
     {
+        //Do nothing we aleady appear to have a webp
+        if (preg_match('/\.webp$/', $this->owner->getFilename()) || $this->owner->getMimeType() == 'image/webp') {
+            return $this->owner;
+        }
+
         return $this->manipulate(
             $this->owner->getVariant(),
             function (AssetStore $store, $filename, $hash, $variant) {
@@ -34,11 +37,6 @@ class ImageExtension extends DataExtension
 
                 // If backend isn't available
                 if (!$backend || !$backend->getImageResource()) {
-                    return null;
-                }
-
-                // Delegate to user manipulation
-                if (preg_match('/\.webp$/', $this->owner->getFilename())) {
                     return null;
                 }
 
@@ -89,9 +87,7 @@ class ImageExtension extends DataExtension
     }
 
     /**
-     * Generate a new DBFile instance using the given callback if it hasn't been created yet, or
-     * return the existing one if it has.
-     *
+     * Generate a new DBFile instance using the given callback if it hasn't been created yet, or return the existing one if it has.
      * @param string $variant name of the variant to create
      * @param callable $callback Callback which should return a new tuple as an array.
      * This callback will be passed the backend, filename, hash, and variant
