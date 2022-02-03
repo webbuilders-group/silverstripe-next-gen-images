@@ -128,7 +128,7 @@ class ImageExtension extends DataExtension
         // otherwise use the existing variant
         $store = Injector::inst()->get(AssetStore::class);
         $tuple = $manipulationResult = null;
-        if (!$store->exists($filename, $hash, $variant)) {
+        if (!$store->exists($filename . '.webp', $hash, $variant)) {
             // Circumvent generation of thumbnails if we only want to get existing ones
             if (!$this->owner->getAllowGeneration()) {
                 return null;
@@ -174,6 +174,6 @@ class ImageExtension extends DataExtension
         // Copy our existing attributes to the new object
         $file->initAttributes($this->owner->getAttributes());
 
-        return $file->setOriginal($this);
+        return $file->setOriginal($this->owner);
     }
 }
