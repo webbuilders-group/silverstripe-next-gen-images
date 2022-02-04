@@ -4,7 +4,6 @@ namespace WebbuildersGroup\NextGenImages\Extensions;
 use SilverStripe\Assets\Image_Backend;
 use SilverStripe\Assets\Storage\AssetContainer;
 use SilverStripe\Assets\Storage\AssetStore;
-use SilverStripe\Assets\Storage\DBFile;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Dev\Deprecation;
 use SilverStripe\ORM\DataExtension;
@@ -14,7 +13,7 @@ use LogicException;
 /**
  * Class \WebbuildersGroup\NextGenImages\Extensions\ImageExtension
  *
- * @property \SilverStripe\Assets\Image|\SilverStripe\Assets\Storage\DBFile|\PictouCounty\Extensions\ImageExtension $owner
+ * @property \SilverStripe\Assets\Image|\SilverStripe\Assets\Storage\DBFile|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $owner
  */
 class ImageExtension extends DataExtension
 {
