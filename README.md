@@ -1,6 +1,6 @@
 Next Gen Images for Silverstripe
 =================
-@TODO
+Adds Support Automatic Generation of WebP Images in Silverstripe
 
 ## Maintainer Contact
 * Ed Chipman ([UndefinedOffset](https://github.com/UndefinedOffset))
