@@ -91,7 +91,7 @@ jobs:
       - name: Perform PHPUnit Tests
         env:
           SS_DATABASE_PORT: ${{ job.services.mysql.ports['3306'] }}
-        run: vendor/bin/phpunit --colors=always --printer WebbuildersGroup\\NextGenImages\\Extensions\\Tests\\PHPUnit\\Bootstrap\\GitHubActionsAnnotatorPrinter tests/PHPUnit
+        run: vendor/bin/phpunit --colors=always --printer WebbuildersGroup\\NextGenImages\\Tests\\PHPUnit\\Bootstrap\\GitHubActionsAnnotatorPrinter tests/PHPUnit
 
       - uses: actions/upload-artifact@v2
         if: failure()

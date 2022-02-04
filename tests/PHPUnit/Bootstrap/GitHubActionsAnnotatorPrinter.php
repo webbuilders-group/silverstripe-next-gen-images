@@ -1,5 +1,5 @@
 <?php
-namespace WebbuildersGroup\NextGenImages\Extensions\Tests\PHPUnit\Bootstrap;
+namespace WebbuildersGroup\NextGenImages\Tests\PHPUnit\Bootstrap;
 
 use PHPUnit\Framework\TestFailure;
 use PHPUnit\Framework\TestResult;
