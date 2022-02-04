@@ -97,7 +97,7 @@ class ImageShortcodeProvider extends SS_ImageShortcodeProvider
                 HTML::createTag(
                     'source',
                     [
-                        'srcset' => ($resized ? $resized->getWebP()->getURL($allowSessionGrant) : $record->getWebP()->getURL($allowSessionGrant)),
+                        'srcset' => (isset($resized) && $resized ? $resized->getWebP()->getURL($allowSessionGrant) : $record->getWebP()->getURL($allowSessionGrant)),
                         'type' => 'image/webp',
                     ]
                 ) .
