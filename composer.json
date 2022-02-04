@@ -7,19 +7,25 @@
     "authors": [
         {
             "name": "Ed Chipman",
-            "homepage": "http://webbuildersgroup.com",
+            "homepage": "https://webbuildersgroup.com",
             "role": "Developer"
         }
     ],
     "require": {
         "silverstripe/assets": "~1.9"
     },
+    "require-dev": {
+        "silverstripe/assets": "~1.9",
+        "phpunit/phpunit": "^9.5",
+        "squizlabs/php_codesniffer": "~3.4"
+    },
     "support": {
         "issues": "https://github.com/webbuilders-group/silverstripe-next-gen-images/issues"
     },
     "autoload": {
         "psr-4": {
-            "WebbuildersGroup\\NextGenImages\\": "src/"
+            "WebbuildersGroup\\NextGenImages\\": "src/",
+            "WebbuildersGroup\\NextGenImages\\Tests\\": "tests/"
         }
     }
 }
