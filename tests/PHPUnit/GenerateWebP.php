@@ -24,9 +24,10 @@ class GenerateWebP extends SapphireTest
 
         // Copy test images for each of the fixture references
         /** @var File $image */
+        /** @var \SilverStripe\DataList|File[] $files */
         $files = File::get()->exclude('ClassName', Folder::class);
         foreach ($files as $image) {
-            $sourcePath = __DIR__ . '/GenerateWebPTest/' . $image->Name;
+            $sourcePath = __DIR__ . '/assets/' . $image->Name;
             $image->setFromLocalFile($sourcePath, $image->Filename);
             $image->publishSingle();
         }
