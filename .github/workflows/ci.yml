@@ -46,7 +46,7 @@ jobs:
           key: php-ext-cache-${{ hashFiles('.github/workflows/ci.yml') }}
 
       - name: Cache PHP Extensions
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ steps.cache-env.outputs.dir }}
           key: ${{ steps.cache-env.outputs.key }}
@@ -69,7 +69,7 @@ jobs:
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: Cache composer dependencies
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -91,7 +91,7 @@ jobs:
       - name: Perform PHPUnit Tests
         env:
           SS_DATABASE_PORT: ${{ job.services.mysql.ports['3306'] }}
-        run: vendor/bin/phpunit --colors=always --printer WebbuildersGroup\\NextGenImages\\Tests\\PHPUnit\\Bootstrap\\GitHubActionsAnnotatorPrinter tests/PHPUnit
+        run: vendor/bin/phpunit --colors=always --printer WebbuildersGroup\\NextGenImages\\Tests\\PHPUnit\\Bootstrap\\GitHubActionsAnnotatorPrinter
 
       - uses: actions/upload-artifact@v2
         if: failure()
@@ -100,7 +100,7 @@ jobs:
           path: ${{ github.workspace }}/artifacts/
 
       - name: Validate Code Style
-        run: vendor/bin/phpcs --colors app --report=full --report-checkstyle=artifacts/phpcs.xml
+        run: vendor/bin/phpcs --colors --report=full --report-checkstyle=artifacts/phpcs.xml
 
       - name: Annotate Code Style Issues
         if: failure()

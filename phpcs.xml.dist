@@ -42,9 +42,8 @@
 	<!-- include php files only -->
 	<arg name="extensions" value="php,lib,inc,php5"/>
 
-	<file>./</file>
-
-	<exclude-pattern>*/vendor/*</exclude-pattern>
-	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<file>./src</file>
+	<file>./tests</file>
+	<file>./_config.php</file>
 </ruleset>
 

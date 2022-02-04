@@ -30,7 +30,7 @@ class GitHubActionsAnnotatorPrinter extends DefaultResultPrinter
         $e = $defect->thrownException();
 
         $errorLines = array_filter(
-            explode("\n", (string)$e),
+            explode("\n", (string) $e),
             function ($l) {
                 return $l;
             }
