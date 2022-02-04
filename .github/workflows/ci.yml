@@ -85,6 +85,7 @@ jobs:
 
       - name: Configure Environment
         run: |
+          mkdir public/assets -p
           cp tests/utils/actions.env.template .env
           mkdir artifacts
 
@@ -97,7 +98,7 @@ jobs:
         if: failure()
         with:
           name: ${{ github.workflow }}-${{ github.run_id }}-phpunit
-          path: ${{ github.workspace }}/artifacts/
+          path: ${{ github.workspace }}/
 
       - name: Validate Code Style
         run: vendor/bin/phpcs --colors --report=full --report-checkstyle=artifacts/phpcs.xml
