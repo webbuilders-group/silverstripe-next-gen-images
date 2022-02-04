@@ -1,5 +1,7 @@
 Next Gen Images for Silverstripe
 =================
+![CI](https://github.com/webbuilders-group/silverstripe-next-gen-images/actions/workflows/ci.yml/badge.svg)
+
 Adds Support Automatic Generation of WebP Images in Silverstripe
 
 ## Maintainer Contact
