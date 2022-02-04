@@ -2,7 +2,6 @@
 namespace WebbuildersGroup\NextGenImages\Tests\PHPUnit\Bootstrap;
 
 use PHPUnit\Framework\TestFailure;
-use PHPUnit\Framework\TestResult;
 use PHPUnit\TextUI\DefaultResultPrinter;
 
 class GitHubActionsAnnotatorPrinter extends DefaultResultPrinter
@@ -14,12 +13,25 @@ class GitHubActionsAnnotatorPrinter extends DefaultResultPrinter
      * @param array $defects Array of Test Failures
      * @param string $type Type of the failure
      */
-    public function printResult(TestResult $result): void
+    protected function printDefects(array $defects, string $type): void
     {
-        foreach ($result->errors() as $i => $defect) {
-            $this->printGitHubAnnotation($defect, $i);
-        }
+        $this->currentType = $type;
+
+        parent::printDefects($defects, $type);
     }
+
+    /**
+     * Handles printing of a single defect
+     * @param TestFailure $defect Test Failure Object
+     * @param int $count Current position
+     */
+    protected function printDefect(TestFailure $defect, int $count): void
+    {
+        parent::printDefect($defect, $count);
+
+        $this->printGitHubAnnotation($defect);
+    }
+
 
     /**
      * Prints a GitHub Annotation Command
