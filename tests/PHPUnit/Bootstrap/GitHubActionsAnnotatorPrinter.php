@@ -3,9 +3,9 @@ namespace WebbuildersGroup\NextGenImages\Tests\PHPUnit\Bootstrap;
 
 use PHPUnit\Framework\TestFailure;
 use PHPUnit\Framework\TestResult;
-use PHPUnit\Util\TestDox\ResultPrinter;
+use PHPUnit\TextUI\DefaultResultPrinter;
 
-class GitHubActionsAnnotatorPrinter extends ResultPrinter
+class GitHubActionsAnnotatorPrinter extends DefaultResultPrinter
 {
     protected $currentType = null;
 
