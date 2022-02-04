@@ -10,9 +10,9 @@ use SilverStripe\Assets\InterventionBackend;
 use SilverStripe\Assets\Storage\DBFile;
 use SilverStripe\Dev\SapphireTest;
 
-class WebPFIleMoving extends SapphireTest
+class WebPFileMoving extends SapphireTest
 {
-    protected static $fixture_file = 'WebPFIleMoving.yml';
+    protected static $fixture_file = 'WebPFileMoving.yml';
 
     /**
      * Configure the test asset store among some other setup stuff
@@ -21,7 +21,7 @@ class WebPFIleMoving extends SapphireTest
     {
         parent::setUp();
 
-        TestAssetStore::activate('GenerateWebPTest');
+        TestAssetStore::activate('WebPFileMoving');
 
         // Copy test images for each of the fixture references
         /** @var \SilverStripe\DataList|File[] $files */
