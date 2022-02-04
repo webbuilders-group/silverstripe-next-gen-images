@@ -81,7 +81,7 @@ jobs:
         run: |
           composer self-update --ansi || true
           if [[ $GITHUB_ACCESS_TOKEN ]]; then composer config --ansi -g github-oauth.github.com $GITHUB_ACCESS_TOKEN; fi
-          composer install --verbose --no-interaction --no-progress --no-suggest --ignore-platform-reqs --optimize-autoloader --ansi
+          composer install --verbose --no-interaction --no-progress --no-suggest --optimize-autoloader --ansi
 
       - name: Configure Environment
         run: |
