@@ -98,7 +98,7 @@ class GenerateWebP extends SapphireTest
 
 
         //Check to see if the file was generated how we expect
-        $this->assertFileExists(Folder::join_paths(TestAssetStore::base_path(), 'folder/wbg-logo-png.png.webp'), 'WebP Variant was not generated as expected');
+        $this->assertFileExists(TestAssetStore::base_path() . '/folder/wbg-logo-png.png.webp', 'WebP Variant was not generated as expected');
 
 
         //Verify the DBFile returned has the expected file name
@@ -132,7 +132,7 @@ class GenerateWebP extends SapphireTest
 
 
         //Check to see if the file was generated how we expect
-        $this->assertFileExists(Folder::join_paths(TestAssetStore::base_path(), 'folder/wbg-logo-png.png.webp'), 'WebP Variant was not generated as expected');
+        $this->assertFileExists(TestAssetStore::base_path() . '/folder/wbg-logo-png.png.webp', 'WebP Variant was not generated as expected');
 
 
         //Verify the DBFile returned has the expected file name
