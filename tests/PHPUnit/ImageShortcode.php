@@ -11,10 +11,11 @@ use SilverStripe\Assets\Storage\DBFile;
 use SilverStripe\Control\Director;
 use SilverStripe\Core\Convert;
 use SilverStripe\Dev\FunctionalTest;
+use SilverStripe\View\Parsers\ShortcodeParser;
 
-class TemplateRendering extends FunctionalTest
+class ImageShortcode extends FunctionalTest
 {
-    protected static $fixture_file = 'TemplateRendering.yml';
+    protected static $fixture_file = 'ImageShortcode.yml';
 
 
     /**
@@ -24,7 +25,7 @@ class TemplateRendering extends FunctionalTest
     {
         parent::setUp();
 
-        TestAssetStore::activate('TemplateRendering');
+        TestAssetStore::activate('ImageShortcode');
 
         // Copy test images for each of the fixture references
         /** @var \SilverStripe\DataList|File[] $files */
@@ -86,29 +87,29 @@ class TemplateRendering extends FunctionalTest
 
 
         //Render the file as if it was being used in the template
-        $renderedTemplate = $img->forTemplate();
+        $parsedShortcode = ShortcodeParser::get()->parse('[image id="' . $img->ID . '" width="250" height="250"]');
 
 
         //Make sure the picture tag exits
-        $this->assertStringContainsString('<picture>', $renderedTemplate);
+        $this->assertStringContainsString('<picture>', $parsedShortcode);
 
 
         //Make sure the source tag exists
-        $this->assertStringContainsString('<source srcset="' . Convert::raw2att($webpURL) . '" type="image/webp" />', $renderedTemplate, 'Could not find the expected <source> tag in the rendered template');
+        $this->assertStringContainsString('<source srcset="' . Convert::raw2att($webpURL) . '" type="image/webp">', $parsedShortcode, 'Could not find the expected <source> tag in the rendered template');
 
 
         //Make sure the image tag exists and links to the correct file
         $originalURL = $img->getURL();
-        $this->assertMatchesRegularExpression('/<img([^>]+) src="' . preg_quote(Convert::raw2att($originalURL), '/') . '"([^>]+)>/', $renderedTemplate, 'Could not fine the <img> tag pointing to the original image');
+        $this->assertMatchesRegularExpression('/<img([^>]*) src="' . preg_quote(Convert::raw2att($originalURL), '/') . '"([^>]*)>/', $parsedShortcode, 'Could not fine the <img> tag pointing to the original image');
 
 
         //Make sure we can hit the WebP file
-        $response = $this->get(Director::makeRelative(str_replace('/TemplateRendering/', '/', $webpURL)));
+        $response = $this->get(Director::makeRelative(str_replace('/ImageShortcode/', '/', $webpURL)));
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertFalse($response->isError());
 
         //Make sure we can hit the original file
-        $response = $this->get(Director::makeRelative(str_replace('/TemplateRendering/', '/', $originalURL)));
+        $response = $this->get(Director::makeRelative(str_replace('/ImageShortcode/', '/', $originalURL)));
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertFalse($response->isError());
     }
@@ -139,30 +140,30 @@ class TemplateRendering extends FunctionalTest
 
 
         //Render the file as if it was being used in the template
-        $renderedTemplate = $img->forTemplate();
+        $parsedShortcode = ShortcodeParser::get()->parse('[image id="' . $img->ID . '" width="250" height="250"]');
 
 
         //Make sure the picture tag exits
-        $this->assertStringContainsString('<picture>', $renderedTemplate);
+        $this->assertStringContainsString('<picture>', $parsedShortcode);
 
 
         //Make sure the source tag exists
-        $this->assertStringContainsString('<source srcset="' . Convert::raw2att($webpURL) . '" type="image/webp" />', $renderedTemplate, 'Could not find the expected <source> tag in the rendered template');
+        $this->assertStringContainsString('<source srcset="' . Convert::raw2att($webpURL) . '" type="image/webp">', $parsedShortcode, 'Could not find the expected <source> tag in the rendered template');
 
 
         //Make sure the image tag exists and links to the correct file
         $originalURL = $img->getURL();
-        $this->assertMatchesRegularExpression('/<img([^>]+) src="' . preg_quote(Convert::raw2att($originalURL), '/') . '"([^>]+)>/', $renderedTemplate, 'Could not fine the <img> tag pointing to the original image');
+        $this->assertMatchesRegularExpression('/<img([^>]*) src="' . preg_quote(Convert::raw2att($originalURL), '/') . '"([^>]*)>/', $parsedShortcode, 'Could not fine the <img> tag pointing to the original image');
 
 
         //Make sure we can hit the WebP file
-        $response = $this->get(Director::makeRelative(str_replace('/TemplateRendering/', '/', $webpURL)));
+        $response = $this->get(Director::makeRelative(str_replace('/ImageShortcode/', '/', $webpURL)));
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertFalse($response->isError());
 
 
         //Make sure we can hit the original file
-        $response = $this->get(Director::makeRelative(str_replace('/TemplateRendering/', '/', $originalURL)));
+        $response = $this->get(Director::makeRelative(str_replace('/ImageShortcode/', '/', $originalURL)));
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertFalse($response->isError());
     }
@@ -193,21 +194,21 @@ class TemplateRendering extends FunctionalTest
 
 
         //Render the file as if it was being used in the template
-        $renderedTemplate = $img->forTemplate();
+        $parsedShortcode = ShortcodeParser::get()->parse('[image id="' . $img->ID . '" width="250" height="250"]');
 
 
         //Make sure the picture tag does not exit
-        $this->assertStringNotContainsString('<picture>', $renderedTemplate);
-        $this->assertStringNotContainsString('<source srcset="', $renderedTemplate);
+        $this->assertStringNotContainsString('<picture>', $parsedShortcode);
+        $this->assertStringNotContainsString('<source srcset="', $parsedShortcode);
 
 
         //Make sure the image tag exists and links to the correct file
         $originalURL = $img->getURL();
-        $this->assertMatchesRegularExpression('/<img([^>]+) src="' . preg_quote(Convert::raw2att($originalURL), '/') . '"([^>]+)>/', $renderedTemplate, 'Could not fine the <img> tag pointing to the original image');
+        $this->assertMatchesRegularExpression('/<img([^>]*) src="' . preg_quote(Convert::raw2att($originalURL), '/') . '"([^>]*)>/', $parsedShortcode, 'Could not fine the <img> tag pointing to the original image');
 
 
         //Make sure we can hit the original file
-        $response = $this->get(Director::makeRelative(str_replace('/TemplateRendering/', '/', $originalURL)));
+        $response = $this->get(Director::makeRelative(str_replace('/ImageShortcode/', '/', $originalURL)));
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertFalse($response->isError());
     }
@@ -233,21 +234,21 @@ class TemplateRendering extends FunctionalTest
 
 
         //Render the file as if it was being used in the template
-        $renderedTemplate = $img->forTemplate();
+        $parsedShortcode = ShortcodeParser::get()->parse('[image id="' . $img->ID . '" width="250" height="250"]');
 
 
         //Make sure the picture tag does not exit
-        $this->assertStringNotContainsString('<picture>', $renderedTemplate);
-        $this->assertStringNotContainsString('<source srcset="', $renderedTemplate);
+        $this->assertStringNotContainsString('<picture>', $parsedShortcode);
+        $this->assertStringNotContainsString('<source srcset="', $parsedShortcode);
 
 
         //Make sure the image tag exists and links to the correct file
         $originalURL = $img->getURL();
-        $this->assertMatchesRegularExpression('/<img([^>]+) src="' . preg_quote(Convert::raw2att($originalURL), '/') . '"([^>]+)>/', $renderedTemplate, 'Could not fine the <img> tag pointing to the original image');
+        $this->assertMatchesRegularExpression('/<img([^>]*) src="' . preg_quote(Convert::raw2att($originalURL), '/') . '"([^>]*)>/', $parsedShortcode, 'Could not fine the <img> tag pointing to the original image');
 
 
         //Make sure we can hit the original file
-        $response = $this->get(Director::makeRelative(str_replace('/TemplateRendering/', '/', $originalURL)));
+        $response = $this->get(Director::makeRelative(str_replace('/ImageShortcode/', '/', $originalURL)));
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertFalse($response->isError());
     }

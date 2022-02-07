@@ -1,0 +1,16 @@
+SilverStripe\Assets\Folder:
+  folder1:
+    Name: "folder"
+SilverStripe\Assets\Image:
+  testpng:
+    Title: "WBG Logo as a PNG"
+    FileFilename: "folder/wbg-logo-png.png"
+    FileHash: "ff9be82ffa523499dc05772f9830e0b6993847cc"
+    Name: "wbg-logo-png.png"
+    Parent: =>SilverStripe\Assets\Folder.folder1
+  testwebp:
+    Title: "WBG Logo as a WebP"
+    FileFilename: "folder/wbg-logo-webp.webp"
+    FileHash: "d5f5177c70de58e94760d6351b7685ac3b645573"
+    Name: "wbg-logo-webp.webp"
+    Parent: =>SilverStripe\Assets\Folder.folder1
