@@ -78,7 +78,7 @@ jobs:
         run: |
           composer self-update --ansi || true
           if [[ $GITHUB_ACCESS_TOKEN ]]; then composer config --ansi -g github-oauth.github.com $GITHUB_ACCESS_TOKEN; fi
-          composer require silverstripe/assets 1.10.*
+          composer require silverstripe/assets 1.10.* --no-update --no-install
           composer require silverstripe/versioned 1.10.*
           composer install --verbose --no-interaction --no-progress --no-suggest --optimize-autoloader --ansi
 
@@ -155,7 +155,7 @@ jobs:
         run: |
           composer self-update --ansi || true
           if [[ $GITHUB_ACCESS_TOKEN ]]; then composer config --ansi -g github-oauth.github.com $GITHUB_ACCESS_TOKEN; fi
-          composer require silverstripe/assets 1.10.*
+          composer require silverstripe/assets 1.10.* --no-update --no-install
           composer require silverstripe/versioned 1.10.*
           composer install --verbose --no-interaction --no-progress --no-suggest --optimize-autoloader --ansi
 
@@ -232,7 +232,7 @@ jobs:
         run: |
           composer self-update --ansi || true
           if [[ $GITHUB_ACCESS_TOKEN ]]; then composer config --ansi -g github-oauth.github.com $GITHUB_ACCESS_TOKEN; fi
-          composer require silverstripe/assets 1.9.*
+          composer require silverstripe/assets 1.9.* --no-update --no-install
           composer require silverstripe/versioned 1.9.*
           composer install --verbose --no-interaction --no-progress --no-suggest --optimize-autoloader --ansi
 
@@ -302,6 +302,7 @@ jobs:
           if [[ $GITHUB_ACCESS_TOKEN ]]; then composer config --ansi -g github-oauth.github.com $GITHUB_ACCESS_TOKEN; fi
           composer require squizlabs/php_codesniffer ~3.4
           composer install --verbose --no-interaction --no-progress --no-suggest --optimize-autoloader --ansi
+          mkdir artifacts
 
       - name: Validate Code Style
         run: vendor/bin/phpcs --colors --report=full --report-checkstyle=artifacts/phpcs.xml
