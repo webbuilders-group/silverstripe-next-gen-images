@@ -138,6 +138,7 @@ class ImageExtension extends DataExtension
             // Preserve backward compatibility
             if (isset($result['Filename'])) {
                 $tuple = $result;
+                $tuple['Hash'] = $hash;
                 Deprecation::notice(
                     '5.0',
                     'Closure passed to ImageManipulation::manipulate() should return null or a two-item array
@@ -146,6 +147,7 @@ class ImageExtension extends DataExtension
                 );
             } else {
                 list($tuple, $manipulationResult) = $result;
+                $tuple['Hash'] = $hash;
             }
         } else {
             $tuple = [
