@@ -173,7 +173,9 @@ class ImageExtension extends DataExtension
         }
 
         // Copy our existing attributes to the new object
-        $file->initAttributes($this->owner->getAttributes());
+        $attr = $this->owner->getAttributes();
+        unset($attr['src']);
+        $file->initAttributes($attr);
 
         return $file->setOriginal($this->owner);
     }
