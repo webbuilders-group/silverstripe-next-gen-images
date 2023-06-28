@@ -16,7 +16,7 @@ on:
 
 jobs:
   silverstripe_410_php74:
-    name: "Silverstripe 4.10 | PHP 7.4"
+    name: "Silverstripe 4.13 | PHP 7.4"
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
     env:
@@ -69,8 +69,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-ss410-php74-${{ hashFiles('**/composer.json') }}-${{ hashFiles('.github/workflows/ci.yml') }}
-          restore-keys: ${{ runner.os }}-composer-ss410-php74-
+          key: ${{ runner.os }}-composer-ss413-php74-${{ hashFiles('**/composer.json') }}-${{ hashFiles('.github/workflows/ci.yml') }}
+          restore-keys: ${{ runner.os }}-composer-ss413-php74-
 
       - name: Install Composer dependencies
         env:
@@ -78,8 +78,8 @@ jobs:
         run: |
           composer self-update --ansi || true
           if [[ $GITHUB_ACCESS_TOKEN ]]; then composer config --ansi -g github-oauth.github.com $GITHUB_ACCESS_TOKEN; fi
-          composer require silverstripe/assets 1.10.* --no-update
-          composer require silverstripe/versioned 1.10.*
+          composer require silverstripe/assets 1.13.* --no-update
+          composer require silverstripe/versioned 1.13.*
           composer install --verbose --no-interaction --no-progress --no-suggest --optimize-autoloader --ansi
 
       - name: Configure Environment
@@ -93,7 +93,7 @@ jobs:
         run: vendor/bin/phpunit --colors=always --printer WebbuildersGroup\\NextGenImages\\Tests\\PHPUnit\\Bootstrap\\GitHubActionsAnnotatorPrinter
 
   silverstripe_410_php80:
-    name: "Silverstripe 4.10 | PHP 8.0"
+    name: "Silverstripe 4.13 | PHP 8.0"
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
     env:
@@ -146,8 +146,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-ss410-php80-${{ hashFiles('**/composer.json') }}-${{ hashFiles('.github/workflows/ci.yml') }}
-          restore-keys: ${{ runner.os }}-composer-ss410-php80-
+          key: ${{ runner.os }}-composer-ss413-php80-${{ hashFiles('**/composer.json') }}-${{ hashFiles('.github/workflows/ci.yml') }}
+          restore-keys: ${{ runner.os }}-composer-ss413-php80-
 
       - name: Install Composer dependencies
         env:
@@ -155,8 +155,8 @@ jobs:
         run: |
           composer self-update --ansi || true
           if [[ $GITHUB_ACCESS_TOKEN ]]; then composer config --ansi -g github-oauth.github.com $GITHUB_ACCESS_TOKEN; fi
-          composer require silverstripe/assets 1.10.* --no-update
-          composer require silverstripe/versioned 1.10.*
+          composer require silverstripe/assets 1.13.* --no-update
+          composer require silverstripe/versioned 1.13.*
           composer install --verbose --no-interaction --no-progress --no-suggest --optimize-autoloader --ansi
 
       - name: Configure Environment
@@ -169,8 +169,8 @@ jobs:
           SS_DATABASE_PORT: ${{ job.services.mysql.ports['3306'] }}
         run: vendor/bin/phpunit --colors=always --printer WebbuildersGroup\\NextGenImages\\Tests\\PHPUnit\\Bootstrap\\GitHubActionsAnnotatorPrinter
 
-  silverstripe_49_php74:
-    name: "Silverstripe 4.9 | PHP 7.4"
+  silverstripe_411_php74:
+    name: "Silverstripe 4.11 | PHP 7.4"
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
     env:
@@ -223,8 +223,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-ss49-php74-${{ hashFiles('**/composer.json') }}-${{ hashFiles('.github/workflows/ci.yml') }}
-          restore-keys: ${{ runner.os }}-composer-ss49-php74-
+          key: ${{ runner.os }}-composer-ss411-php74-${{ hashFiles('**/composer.json') }}-${{ hashFiles('.github/workflows/ci.yml') }}
+          restore-keys: ${{ runner.os }}-composer-ss411-php74-
 
       - name: Install Composer dependencies
         env:
@@ -232,8 +232,8 @@ jobs:
         run: |
           composer self-update --ansi || true
           if [[ $GITHUB_ACCESS_TOKEN ]]; then composer config --ansi -g github-oauth.github.com $GITHUB_ACCESS_TOKEN; fi
-          composer require silverstripe/assets 1.9.* --no-update
-          composer require silverstripe/versioned 1.9.*
+          composer require silverstripe/assets 1.11.* --no-update
+          composer require silverstripe/versioned 1.11.*
           composer install --verbose --no-interaction --no-progress --no-suggest --optimize-autoloader --ansi
 
       - name: Configure Environment
