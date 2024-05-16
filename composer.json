@@ -12,7 +12,7 @@
         }
     ],
     "require": {
-        "silverstripe/assets": "~1.9"
+        "silverstripe/assets": "~2.2"
     },
     "require-dev": {
         "silverstripe/versioned": "~1.9",

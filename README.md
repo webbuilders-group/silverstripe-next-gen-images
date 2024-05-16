@@ -8,7 +8,7 @@ Adds Support Automatic Generation of WebP Images in Silverstripe
 * Ed Chipman ([UndefinedOffset](https://github.com/UndefinedOffset))
 
 ## Requirements
-* [Silverstripe Assets](https://github.com/silverstripe/silverstripe-assets) 1.9+
+* [Silverstripe Assets](https://github.com/silverstripe/silverstripe-assets) 2.2+
 
 
 ## Installation

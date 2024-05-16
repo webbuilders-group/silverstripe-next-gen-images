@@ -4,20 +4,6 @@ After:
   - "silverstripe/framework#*"
   - "silverstripe/assets#assetsimage"
 ---
-SilverStripe\Core\Injector\Injector:
-  SilverStripe\Assets\FilenameParsing\FileResolutionStrategy.public:
-    class: 'WebbuildersGroup\NextGenImages\FilenameParsing\FileIDHelperResolutionStrategy'
-    properties:
-      ResolutionFileIDHelpers:
-        - '%$WebbuildersGroup\NextGenImages\FilenameParsing\HashFileIDHelper'
-        - '%$WebbuildersGroup\NextGenImages\FilenameParsing\NaturalFileIDHelper'
-  SilverStripe\Assets\FilenameParsing\FileResolutionStrategy.protected:
-    class: 'WebbuildersGroup\NextGenImages\FilenameParsing\FileIDHelperResolutionStrategy'
-    properties:
-      ResolutionFileIDHelpers:
-        - '%$WebbuildersGroup\NextGenImages\FilenameParsing\HashFileIDHelper'
-        - '%$WebbuildersGroup\NextGenImages\FilenameParsing\NaturalFileIDHelper'
-
 SilverStripe\Assets\File:
   allowed_extensions:
     - 'webp'
