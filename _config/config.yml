@@ -1,22 +1,7 @@
 ---
 Name: nextgenimages
-After:
-  - "silverstripe/framework#*"
-  - "silverstripe/assets#assetsimage"
+After: "#assetsimage"
 ---
-SilverStripe\Assets\File:
-  allowed_extensions:
-    - 'webp'
-  class_for_file_extension:
-    webp: 'SilverStripe\Assets\Image'
-  app_categories:
-    image:
-      - 'webp'
-    "image/supported":
-      - 'webp'
-  file_types:
-    webp: "WebP image - good general-purpose format"
-
 SilverStripe\Assets\Image:
   extensions:
     - 'WebbuildersGroup\NextGenImages\Extensions\ImageExtension'
@@ -24,5 +9,3 @@ SilverStripe\Assets\Image:
 SilverStripe\Assets\Storage\DBFile:
   extensions:
     - 'WebbuildersGroup\NextGenImages\Extensions\ImageExtension'
-  supported_images:
-    - 'image/webp'
