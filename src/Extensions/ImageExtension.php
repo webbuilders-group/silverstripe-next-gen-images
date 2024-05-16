@@ -32,7 +32,7 @@ class ImageExtension extends DataExtension
      */
     public function getWebP()
     {
-        //Do nothing we aleady appear to have a webp
+        // Do nothing we aleady appear to have a webp
         if ($this->owner->getIsWebP()) {
             return $this->owner;
         }

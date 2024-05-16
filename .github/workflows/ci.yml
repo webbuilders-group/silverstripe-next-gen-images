@@ -58,7 +58,7 @@ jobs:
           extensions: ${{ env.php_extensions }}
           ini-values: log_errors=On, error_log="${{github.workspace}}/artifacts/php_errors.log"
           coverage: none
-          tools: composer:v1
+          tools: composer:v2
 
       - name: Get composer cache directory
         id: composer-cache

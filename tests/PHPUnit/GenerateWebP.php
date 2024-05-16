@@ -58,24 +58,24 @@ class GenerateWebP extends SapphireTest
         /** @var Image|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $png **/
         $png = $this->objFromFixture(Image::class, 'testpng');
 
-        //Sanity Check
+        // Sanity Check
         $this->assertNotEmpty($png);
         $this->assertNotFalse($png);
         $this->assertTrue($png->exists());
 
-        //Make srue the image was not detected as a WebP
+        // Make srue the image was not detected as a WebP
         $this->assertFalse($png->getIsWebP(), 'Image should not have been a WebP but it was detected as one');
 
 
         /** @var Image|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $webp **/
         $webp = $this->objFromFixture(Image::class, 'testwebp');
 
-        //Sanity Check
+        // Sanity Check
         $this->assertNotEmpty($webp);
         $this->assertNotFalse($webp);
         $this->assertTrue($webp->exists());
 
-        //Make sure the image was detected as a WebP
+        // Make sure the image was detected as a WebP
         $this->assertTrue($webp->getIsWebP(), 'Image should have been a WebP but it wasn\'t detected as one');
     }
 
@@ -87,18 +87,18 @@ class GenerateWebP extends SapphireTest
         /** @var Image|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $img **/
         $img = $this->objFromFixture(Image::class, 'testpng');
 
-        //Sanity Check
+        // Sanity Check
         $this->assertNotEmpty($img);
         $this->assertNotFalse($img);
         $this->assertTrue($img->exists());
 
 
-        //Attempt to generate the WebP
+        // Attempt to generate the WebP
         $generatedWebP = $img->getWebP();
         $this->assertInstanceOf(DBFile::class, $generatedWebP);
 
 
-        //Check to see if the file was generated how we expect
+        // Check to see if the file was generated how we expect
         $this->assertFileExists(TestAssetStore::base_path() . '/folder/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', 'WebP Variant was not generated as expected');
     }
 
@@ -110,25 +110,25 @@ class GenerateWebP extends SapphireTest
         /** @var Image|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $img **/
         $img = $this->objFromFixture(Image::class, 'testpng');
 
-        //Sanity Check
+        // Sanity Check
         $this->assertNotEmpty($img);
         $this->assertNotFalse($img);
         $this->assertTrue($img->exists());
 
 
-        //Create a DBFile of the image
+        // Create a DBFile of the image
         /** @var DBFile|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $dbFile **/
         $dbFile = $img->File;
         $this->assertInstanceOf(DBFile::class, $dbFile);
         $this->assertEquals('folder/wbg-logo-png.png', $dbFile->Filename);
 
 
-        //Attempt to generate the WebP
+        // Attempt to generate the WebP
         $generatedWebP = $dbFile->getWebP();
         $this->assertInstanceOf(DBFile::class, $generatedWebP);
 
 
-        //Check to see if the file was generated how we expect
+        // Check to see if the file was generated how we expect
         $this->assertFileExists(TestAssetStore::base_path() . '/folder/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', 'WebP Variant was not generated as expected');
     }
 
@@ -140,26 +140,26 @@ class GenerateWebP extends SapphireTest
         /** @var Image|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $img **/
         $img = $this->objFromFixture(Image::class, 'testpng');
 
-        //Sanity Check
+        // Sanity Check
         $this->assertNotEmpty($img);
         $this->assertNotFalse($img);
         $this->assertTrue($img->exists());
 
-        //Generate the WebP
+        // Generate the WebP
         $generatedWebP = $img->getWebP();
 
 
-        //Resample the WebP
+        // Resample the WebP
         /** @var DBFile|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $resampled **/
         $resampled = $generatedWebP->ScaleWidth(100);
         $this->assertInstanceOf(DBFile::class, $resampled);
 
 
-        //Make sure we got a resample back
+        // Make sure we got a resample back
         $this->assertEquals('ExtRewriteWyJwbmciLCJ3ZWJwIl0_ScaleWidthWzEwMF0', $resampled->getVariant());
 
 
-        //Make sure the resample has the name we expect
+        // Make sure the resample has the name we expect
         $this->assertEquals('/assets/GenerateWebPTest/folder/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0_ScaleWidthWzEwMF0.webp', $resampled->getURL(false));
     }
 
@@ -171,28 +171,28 @@ class GenerateWebP extends SapphireTest
         /** @var Image|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $img **/
         $img = $this->objFromFixture(Image::class, 'testpng');
 
-        //Sanity Check
+        // Sanity Check
         $this->assertNotEmpty($img);
         $this->assertNotFalse($img);
         $this->assertTrue($img->exists());
 
         $dbFile = $img->File;
 
-        //Generate the WebP
+        // Generate the WebP
         $generatedWebP = $dbFile->getWebP();
 
 
-        //Resample the WebP
+        // Resample the WebP
         /** @var DBFile|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $resampled **/
         $resampled = $generatedWebP->ScaleWidth(100);
         $this->assertInstanceOf(DBFile::class, $resampled);
 
 
-        //Make sure we got a resample back
+        // Make sure we got a resample back
         $this->assertEquals('ExtRewriteWyJwbmciLCJ3ZWJwIl0_ScaleWidthWzEwMF0', $resampled->getVariant());
 
 
-        //Make sure the resample has the name we expect
+        // Make sure the resample has the name we expect
         $this->assertEquals('/assets/GenerateWebPTest/folder/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0_ScaleWidthWzEwMF0.webp', $resampled->getURL(false));
     }
 
@@ -204,34 +204,34 @@ class GenerateWebP extends SapphireTest
         /** @var Image|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $img **/
         $img = $this->objFromFixture(Image::class, 'testpng');
 
-        //Sanity Check
+        // Sanity Check
         $this->assertNotEmpty($img);
         $this->assertNotFalse($img);
         $this->assertTrue($img->exists());
 
 
-        //Resample the original
+        // Resample the original
         /** @var DBFile|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $resampled **/
         $resampled = $img->ScaleWidth(100);
         $this->assertInstanceOf(DBFile::class, $resampled);
 
 
-        //Make sure we got a resample back
+        // Make sure we got a resample back
         $this->assertEquals('ScaleWidthWzEwMF0', $resampled->getVariant());
 
-        //Make sure the resample has the name we expect
+        // Make sure the resample has the name we expect
         $this->assertEquals('/assets/GenerateWebPTest/folder/wbg-logo-png__ScaleWidthWzEwMF0.png', $resampled->getURL(false));
 
 
-        //Generate the WebP
+        // Generate the WebP
         $generatedWebP = $resampled->getWebP();
 
 
-        //Make sure we got a resample back
+        // Make sure we got a resample back
         $this->assertEquals('ScaleWidthWzEwMF0_ExtRewriteWyJwbmciLCJ3ZWJwIl0', $generatedWebP->getVariant());
 
 
-        //Make sure the resample has the name we expect
+        // Make sure the resample has the name we expect
         $this->assertEquals('/assets/GenerateWebPTest/folder/wbg-logo-png__ScaleWidthWzEwMF0_ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', $generatedWebP->getURL(false));
     }
 
@@ -243,7 +243,7 @@ class GenerateWebP extends SapphireTest
         /** @var Image|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $img **/
         $img = $this->objFromFixture(Image::class, 'testpng');
 
-        //Sanity Check
+        // Sanity Check
         $this->assertNotEmpty($img);
         $this->assertNotFalse($img);
         $this->assertTrue($img->exists());
@@ -251,28 +251,28 @@ class GenerateWebP extends SapphireTest
         $dbFile = $img->File;
 
 
-        //Resample the original
+        // Resample the original
         /** @var DBFile|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $resampled **/
         $resampled = $dbFile->ScaleWidth(100);
         $this->assertInstanceOf(DBFile::class, $resampled);
 
 
-        //Make sure we got a resample back
+        // Make sure we got a resample back
         $this->assertEquals('ScaleWidthWzEwMF0', $resampled->getVariant());
 
-        //Make sure the resample has the name we expect
+        // Make sure the resample has the name we expect
         $this->assertEquals('/assets/GenerateWebPTest/folder/wbg-logo-png__ScaleWidthWzEwMF0.png', $resampled->getURL(false));
 
 
-        //Generate the WebP
+        // Generate the WebP
         $generatedWebP = $resampled->getWebP();
 
 
-        //Make sure we got a resample back
+        // Make sure we got a resample back
         $this->assertEquals('ScaleWidthWzEwMF0_ExtRewriteWyJwbmciLCJ3ZWJwIl0', $generatedWebP->getVariant());
 
 
-        //Make sure the resample has the name we expect
+        // Make sure the resample has the name we expect
         $this->assertEquals('/assets/GenerateWebPTest/folder/wbg-logo-png__ScaleWidthWzEwMF0_ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', $generatedWebP->getURL(false));
     }
 
@@ -284,15 +284,15 @@ class GenerateWebP extends SapphireTest
         /** @var Image|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $img **/
         $img = $this->objFromFixture(Image::class, 'testwebp');
 
-        //Sanity Check
+        // Sanity Check
         $this->assertNotEmpty($img);
         $this->assertNotFalse($img);
         $this->assertTrue($img->exists());
 
-        //Generate the WebP
+        // Generate the WebP
         $generatedWebP = $img->getWebP();
 
-        //Make sure we got an image back again and that it's the same image
+        // Make sure we got an image back again and that it's the same image
         $this->assertInstanceOf(Image::class, $generatedWebP);
         $this->assertEquals($img->ID, $generatedWebP->ID);
         $this->assertEquals($img->getURL(), $generatedWebP->getURL());
@@ -306,17 +306,17 @@ class GenerateWebP extends SapphireTest
         /** @var Image|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $img **/
         $img = $this->objFromFixture(Image::class, 'testwebp');
 
-        //Sanity Check
+        // Sanity Check
         $this->assertNotEmpty($img);
         $this->assertNotFalse($img);
         $this->assertTrue($img->exists());
 
         $img = $img->File;
 
-        //Generate the WebP
+        // Generate the WebP
         $generatedWebP = $img->getWebP();
 
-        //Make sure we got an image back again and that it's the same image
+        // Make sure we got an image back again and that it's the same image
         $this->assertInstanceOf(DBFile::class, $generatedWebP);
         $this->assertEquals($img->getURL(), $generatedWebP->getURL());
     }

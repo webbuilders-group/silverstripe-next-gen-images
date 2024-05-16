@@ -62,53 +62,53 @@ class ImageShortcode extends FunctionalTest
         /** @var Image|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $img **/
         $img = $this->objFromFixture(Image::class, 'testpng');
 
-        //Sanity Check
+        // Sanity Check
         $this->assertNotEmpty($img);
         $this->assertNotFalse($img);
         $this->assertTrue($img->exists());
 
 
-        //Attempt to generate the WebP
+        // Attempt to generate the WebP
         $generatedWebP = $img->getWebP();
         $this->assertInstanceOf(DBFile::class, $generatedWebP);
         $this->assertFileExists(TestAssetStore::base_path() . '/.protected/folder/' . substr($img->FileHash, 0, HashFileIDHelper::HASH_TRUNCATE_LENGTH) . '/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', 'WebP Variant was not generated as expected');
 
 
-        //Publish the file
+        // Publish the file
         $img->publishSingle();
         $this->assertFileExists(TestAssetStore::base_path() . '/folder/wbg-logo-png.png', 'Orginal was not moved as expected');
         $this->assertFileExists(TestAssetStore::base_path() . '/folder/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', 'WebP Variant was not moved as expected');
         $this->assertFileDoesNotExist(TestAssetStore::base_path() . '/.protected/folder/' . substr($img->FileHash, 0, HashFileIDHelper::HASH_TRUNCATE_LENGTH) . '/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', 'WebP Variant was not removed from the protected path as expected');
 
 
-        //Make sure the url ends how we'd expect
+        // Make sure the url ends how we'd expect
         $webpURL = $generatedWebP->getURL();
         $this->assertStringEndsWith('folder/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', $webpURL);
 
 
-        //Render the file as if it was being used in the template
+        // Render the file as if it was being used in the template
         $parsedShortcode = ShortcodeParser::get()->parse('[image id="' . $img->ID . '" width="250" height="250"]');
 
 
-        //Make sure the picture tag exits
+        // Make sure the picture tag exits
         $this->assertStringContainsString('<picture>', $parsedShortcode);
 
 
-        //Make sure the source tag exists
+        // Make sure the source tag exists
         $this->assertStringContainsString('<source srcset="' . Convert::raw2att($webpURL) . '" type="image/webp">', $parsedShortcode, 'Could not find the expected <source> tag in the rendered template');
 
 
-        //Make sure the image tag exists and links to the correct file
+        // Make sure the image tag exists and links to the correct file
         $originalURL = $img->getURL();
         $this->assertMatchesRegularExpression('/<img([^>]*) src="' . preg_quote(Convert::raw2att($originalURL), '/') . '"([^>]*)>/', $parsedShortcode, 'Could not fine the <img> tag pointing to the original image');
 
 
-        //Make sure we can hit the WebP file
+        // Make sure we can hit the WebP file
         $response = $this->get(Director::makeRelative(str_replace('/ImageShortcode/', '/', $webpURL)));
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertFalse($response->isError());
 
-        //Make sure we can hit the original file
+        // Make sure we can hit the original file
         $response = $this->get(Director::makeRelative(str_replace('/ImageShortcode/', '/', $originalURL)));
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertFalse($response->isError());
@@ -122,47 +122,47 @@ class ImageShortcode extends FunctionalTest
         /** @var Image|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $img **/
         $img = $this->objFromFixture(Image::class, 'testpng');
 
-        //Sanity Check
+        // Sanity Check
         $this->assertNotEmpty($img);
         $this->assertNotFalse($img);
         $this->assertTrue($img->exists());
 
 
-        //Attempt to generate the WebP
+        // Attempt to generate the WebP
         $generatedWebP = $img->getWebP();
         $this->assertInstanceOf(DBFile::class, $generatedWebP);
         $this->assertFileExists(TestAssetStore::base_path() . '/.protected/folder/' . substr($img->FileHash, 0, HashFileIDHelper::HASH_TRUNCATE_LENGTH) . '/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', 'WebP Variant was not generated as expected');
 
 
-        //Make sure the url ends how we'd expect
+        // Make sure the url ends how we'd expect
         $webpURL = $generatedWebP->getURL();
         $this->assertStringEndsWith('/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', $webpURL);
 
 
-        //Render the file as if it was being used in the template
+        // Render the file as if it was being used in the template
         $parsedShortcode = ShortcodeParser::get()->parse('[image id="' . $img->ID . '" width="250" height="250"]');
 
 
-        //Make sure the picture tag exits
+        // Make sure the picture tag exits
         $this->assertStringContainsString('<picture>', $parsedShortcode);
 
 
-        //Make sure the source tag exists
+        // Make sure the source tag exists
         $this->assertStringContainsString('<source srcset="' . Convert::raw2att($webpURL) . '" type="image/webp">', $parsedShortcode, 'Could not find the expected <source> tag in the rendered template');
 
 
-        //Make sure the image tag exists and links to the correct file
+        // Make sure the image tag exists and links to the correct file
         $originalURL = $img->getURL();
         $this->assertMatchesRegularExpression('/<img([^>]*) src="' . preg_quote(Convert::raw2att($originalURL), '/') . '"([^>]*)>/', $parsedShortcode, 'Could not fine the <img> tag pointing to the original image');
 
 
-        //Make sure we can hit the WebP file
+        // Make sure we can hit the WebP file
         $response = $this->get(Director::makeRelative(str_replace('/ImageShortcode/', '/', $webpURL)));
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertFalse($response->isError());
 
 
-        //Make sure we can hit the original file
+        // Make sure we can hit the original file
         $response = $this->get(Director::makeRelative(str_replace('/ImageShortcode/', '/', $originalURL)));
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertFalse($response->isError());
@@ -176,38 +176,38 @@ class ImageShortcode extends FunctionalTest
         /** @var Image|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $img **/
         $img = $this->objFromFixture(Image::class, 'testwebp');
 
-        //Sanity Check
+        // Sanity Check
         $this->assertNotEmpty($img);
         $this->assertNotFalse($img);
         $this->assertTrue($img->exists());
 
 
-        //Attempt to generate the WebP
+        // Attempt to generate the WebP
         $generatedWebP = $img->getWebP();
         $this->assertInstanceOf(Image::class, $generatedWebP);
         $this->assertFileDoesNotExist(TestAssetStore::base_path() . '/.protected/folder/' . substr($img->FileHash, 0, HashFileIDHelper::HASH_TRUNCATE_LENGTH) . '/wbg-logo-webp.webp.webp', 'WebP Variant was not generated as expected');
 
 
-        //Publish the file
+        // Publish the file
         $img->publishSingle();
         $this->assertFileExists(TestAssetStore::base_path() . '/folder/wbg-logo-webp.webp', 'Orginal was not moved as expected');
 
 
-        //Render the file as if it was being used in the template
+        // Render the file as if it was being used in the template
         $parsedShortcode = ShortcodeParser::get()->parse('[image id="' . $img->ID . '" width="250" height="250"]');
 
 
-        //Make sure the picture tag does not exit
+        // Make sure the picture tag does not exit
         $this->assertStringNotContainsString('<picture>', $parsedShortcode);
         $this->assertStringNotContainsString('<source srcset="', $parsedShortcode);
 
 
-        //Make sure the image tag exists and links to the correct file
+        // Make sure the image tag exists and links to the correct file
         $originalURL = $img->getURL();
         $this->assertMatchesRegularExpression('/<img([^>]*) src="' . preg_quote(Convert::raw2att($originalURL), '/') . '"([^>]*)>/', $parsedShortcode, 'Could not fine the <img> tag pointing to the original image');
 
 
-        //Make sure we can hit the original file
+        // Make sure we can hit the original file
         $response = $this->get(Director::makeRelative(str_replace('/ImageShortcode/', '/', $originalURL)));
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertFalse($response->isError());
@@ -221,33 +221,33 @@ class ImageShortcode extends FunctionalTest
         /** @var Image|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $img **/
         $img = $this->objFromFixture(Image::class, 'testwebp');
 
-        //Sanity Check
+        // Sanity Check
         $this->assertNotEmpty($img);
         $this->assertNotFalse($img);
         $this->assertTrue($img->exists());
 
 
-        //Attempt to generate the WebP
+        // Attempt to generate the WebP
         $generatedWebP = $img->getWebP();
         $this->assertInstanceOf(Image::class, $generatedWebP);
         $this->assertFileDoesNotExist(TestAssetStore::base_path() . '/.protected/folder/' . substr($img->FileHash, 0, HashFileIDHelper::HASH_TRUNCATE_LENGTH) . '/wbg-logo-webp.webp.webp', 'WebP Variant was not generated as expected');
 
 
-        //Render the file as if it was being used in the template
+        // Render the file as if it was being used in the template
         $parsedShortcode = ShortcodeParser::get()->parse('[image id="' . $img->ID . '" width="250" height="250"]');
 
 
-        //Make sure the picture tag does not exit
+        // Make sure the picture tag does not exit
         $this->assertStringNotContainsString('<picture>', $parsedShortcode);
         $this->assertStringNotContainsString('<source srcset="', $parsedShortcode);
 
 
-        //Make sure the image tag exists and links to the correct file
+        // Make sure the image tag exists and links to the correct file
         $originalURL = $img->getURL(true);
         $this->assertMatchesRegularExpression('/<img([^>]*) src="' . preg_quote(Convert::raw2att($originalURL), '/') . '"([^>]*)>/', $parsedShortcode, 'Could not fine the <img> tag pointing to the original image');
 
 
-        //Make sure we can hit the original file
+        // Make sure we can hit the original file
         $response = $this->get(Director::makeRelative(str_replace('/ImageShortcode/', '/', $originalURL)));
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertFalse($response->isError());
