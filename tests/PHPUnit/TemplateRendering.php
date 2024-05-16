@@ -70,19 +70,19 @@ class TemplateRendering extends FunctionalTest
         //Attempt to generate the WebP
         $generatedWebP = $img->getWebP();
         $this->assertInstanceOf(DBFile::class, $generatedWebP);
-        $this->assertFileExists(TestAssetStore::base_path() . '/.protected/folder/' . substr($img->FileHash, 0, HashFileIDHelper::HASH_TRUNCATE_LENGTH) . '/wbg-logo-png.png.webp', 'WebP Variant was not generated as expected');
+        $this->assertFileExists(TestAssetStore::base_path() . '/.protected/folder/' . substr($img->FileHash, 0, HashFileIDHelper::HASH_TRUNCATE_LENGTH) . '/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', 'WebP Variant was not generated as expected');
 
 
         //Publish the file
         $img->publishSingle();
         $this->assertFileExists(TestAssetStore::base_path() . '/folder/wbg-logo-png.png', 'Orginal was not moved as expected');
-        $this->assertFileExists(TestAssetStore::base_path() . '/folder/wbg-logo-png.png.webp', 'WebP Variant was not moved as expected');
-        $this->assertFileDoesNotExist(TestAssetStore::base_path() . '/.protected/folder/' . substr($img->FileHash, 0, HashFileIDHelper::HASH_TRUNCATE_LENGTH) . '/wbg-logo-png.png.webp', 'WebP Variant was not removed from the protected path as expected');
+        $this->assertFileExists(TestAssetStore::base_path() . '/folder/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', 'WebP Variant was not moved as expected');
+        $this->assertFileDoesNotExist(TestAssetStore::base_path() . '/.protected/folder/' . substr($img->FileHash, 0, HashFileIDHelper::HASH_TRUNCATE_LENGTH) . '/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', 'WebP Variant was not removed from the protected path as expected');
 
 
         //Make sure the url ends how we'd expect
         $webpURL = $generatedWebP->getURL();
-        $this->assertStringEndsWith('folder/wbg-logo-png.png.webp', $webpURL);
+        $this->assertStringEndsWith('folder/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', $webpURL);
 
 
         //Render the file as if it was being used in the template
@@ -130,12 +130,12 @@ class TemplateRendering extends FunctionalTest
         //Attempt to generate the WebP
         $generatedWebP = $img->getWebP();
         $this->assertInstanceOf(DBFile::class, $generatedWebP);
-        $this->assertFileExists(TestAssetStore::base_path() . '/.protected/folder/' . substr($img->FileHash, 0, HashFileIDHelper::HASH_TRUNCATE_LENGTH) . '/wbg-logo-png.png.webp', 'WebP Variant was not generated as expected');
+        $this->assertFileExists(TestAssetStore::base_path() . '/.protected/folder/' . substr($img->FileHash, 0, HashFileIDHelper::HASH_TRUNCATE_LENGTH) . '/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', 'WebP Variant was not generated as expected');
 
 
         //Make sure the url ends how we'd expect
         $webpURL = $generatedWebP->getURL();
-        $this->assertStringEndsWith('/wbg-logo-png.png.webp', $webpURL);
+        $this->assertStringEndsWith('/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', $webpURL);
 
 
         //Render the file as if it was being used in the template

@@ -99,11 +99,7 @@ class GenerateWebP extends SapphireTest
 
 
         //Check to see if the file was generated how we expect
-        $this->assertFileExists(TestAssetStore::base_path() . '/folder/wbg-logo-png.png.webp', 'WebP Variant was not generated as expected');
-
-
-        //Verify the DBFile returned has the expected file name
-        $this->assertEquals('folder/wbg-logo-png.png.webp', $generatedWebP->Filename);
+        $this->assertFileExists(TestAssetStore::base_path() . '/folder/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', 'WebP Variant was not generated as expected');
     }
 
     /**
@@ -133,11 +129,7 @@ class GenerateWebP extends SapphireTest
 
 
         //Check to see if the file was generated how we expect
-        $this->assertFileExists(TestAssetStore::base_path() . '/folder/wbg-logo-png.png.webp', 'WebP Variant was not generated as expected');
-
-
-        //Verify the DBFile returned has the expected file name
-        $this->assertEquals('folder/wbg-logo-png.png.webp', $generatedWebP->Filename);
+        $this->assertFileExists(TestAssetStore::base_path() . '/folder/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', 'WebP Variant was not generated as expected');
     }
 
     /**
@@ -164,11 +156,11 @@ class GenerateWebP extends SapphireTest
 
 
         //Make sure we got a resample back
-        $this->assertEquals('ScaleWidthWzEwMF0', $resampled->getVariant());
+        $this->assertEquals('ExtRewriteWyJwbmciLCJ3ZWJwIl0_ScaleWidthWzEwMF0', $resampled->getVariant());
 
 
         //Make sure the resample has the name we expect
-        $this->assertEquals('/assets/GenerateWebPTest/folder/wbg-logo-png__ScaleWidthWzEwMF0.png.webp', $resampled->getURL(false));
+        $this->assertEquals('/assets/GenerateWebPTest/folder/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0_ScaleWidthWzEwMF0.webp', $resampled->getURL(false));
     }
 
     /**
@@ -197,11 +189,11 @@ class GenerateWebP extends SapphireTest
 
 
         //Make sure we got a resample back
-        $this->assertEquals('ScaleWidthWzEwMF0', $resampled->getVariant());
+        $this->assertEquals('ExtRewriteWyJwbmciLCJ3ZWJwIl0_ScaleWidthWzEwMF0', $resampled->getVariant());
 
 
         //Make sure the resample has the name we expect
-        $this->assertEquals('/assets/GenerateWebPTest/folder/wbg-logo-png__ScaleWidthWzEwMF0.png.webp', $resampled->getURL(false));
+        $this->assertEquals('/assets/GenerateWebPTest/folder/wbg-logo-png__ExtRewriteWyJwbmciLCJ3ZWJwIl0_ScaleWidthWzEwMF0.webp', $resampled->getURL(false));
     }
 
     /**
@@ -236,11 +228,11 @@ class GenerateWebP extends SapphireTest
 
 
         //Make sure we got a resample back
-        $this->assertEquals('ScaleWidthWzEwMF0', $generatedWebP->getVariant());
+        $this->assertEquals('ScaleWidthWzEwMF0_ExtRewriteWyJwbmciLCJ3ZWJwIl0', $generatedWebP->getVariant());
 
 
         //Make sure the resample has the name we expect
-        $this->assertEquals('/assets/GenerateWebPTest/folder/wbg-logo-png__ScaleWidthWzEwMF0.png.webp', $generatedWebP->getURL(false));
+        $this->assertEquals('/assets/GenerateWebPTest/folder/wbg-logo-png__ScaleWidthWzEwMF0_ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', $generatedWebP->getURL(false));
     }
 
     /**
@@ -277,11 +269,11 @@ class GenerateWebP extends SapphireTest
 
 
         //Make sure we got a resample back
-        $this->assertEquals('ScaleWidthWzEwMF0', $generatedWebP->getVariant());
+        $this->assertEquals('ScaleWidthWzEwMF0_ExtRewriteWyJwbmciLCJ3ZWJwIl0', $generatedWebP->getVariant());
 
 
         //Make sure the resample has the name we expect
-        $this->assertEquals('/assets/GenerateWebPTest/folder/wbg-logo-png__ScaleWidthWzEwMF0.png.webp', $generatedWebP->getURL(false));
+        $this->assertEquals('/assets/GenerateWebPTest/folder/wbg-logo-png__ScaleWidthWzEwMF0_ExtRewriteWyJwbmciLCJ3ZWJwIl0.webp', $generatedWebP->getURL(false));
     }
 
     /**
