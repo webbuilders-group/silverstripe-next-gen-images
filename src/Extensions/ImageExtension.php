@@ -1,21 +1,15 @@
 <?php
 namespace WebbuildersGroup\NextGenImages\Extensions;
 
-use SilverStripe\Assets\Image_Backend;
-use SilverStripe\Assets\Storage\AssetContainer;
 use SilverStripe\Assets\Storage\AssetStore;
-use SilverStripe\Core\Injector\Injector;
-use SilverStripe\Dev\Deprecation;
-use SilverStripe\ORM\DataExtension;
-use SilverStripe\ORM\FieldType\DBField;
-use LogicException;
+use SilverStripe\Core\Extension;
 
 /**
  * Class \WebbuildersGroup\NextGenImages\Extensions\ImageExtension
  *
  * @property \SilverStripe\Assets\Image|\SilverStripe\Assets\Storage\DBFile|\WebbuildersGroup\NextGenImages\Extensions\ImageExtension $owner
  */
-class ImageExtension extends DataExtension
+class ImageExtension extends Extension
 {
     /**
      * Detects if a file is a WebP image or not

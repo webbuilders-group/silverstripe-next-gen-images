@@ -1,5 +1,8 @@
 # Changelog
 
+## [2.1.0](https://github.com/webbuilders-group/silverstripe-next-gen-images/tree/2.1.0) (2024-11-07)
+[Full Changelog](https://github.com/webbuilders-group/silverstripe-next-gen-images/compare/2.0.1...2.1.0)
+
 ## [2.0.1](https://github.com/webbuilders-group/silverstripe-next-gen-images/tree/2.0.1) (2024-10-09)
 [Full Changelog](https://github.com/webbuilders-group/silverstripe-next-gen-images/compare/2.0.0...2.0.1)
 
