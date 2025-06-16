@@ -74,7 +74,7 @@ jobs:
       - name: Install Composer dependencies
         env:
             GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run:
+        run: |
           composer self-update --ansi || true
           if [[ $GITHUB_ACCESS_TOKEN ]]; then composer config --ansi -g github-oauth.github.com $GITHUB_ACCESS_TOKEN; fi
           composer config allow-plugins.composer/installers true
@@ -171,10 +171,13 @@ jobs:
           cp tests/utils/actions.env.template .env
           mkdir artifacts
 
+      - name: Configure matchers
+        uses: mheap/phpunit-matcher-action@v1
+
       - name: Perform PHPUnit Tests
         env:
           SS_DATABASE_PORT: ${{ job.services.mysql.ports['3306'] }}
-        run: vendor/bin/phpunit --colors=always --printer WebbuildersGroup\\NextGenImages\\Tests\\PHPUnit\\Bootstrap\\GitHubActionsAnnotatorPrinter
+        run: SS_PHPUNIT_FLUSH=1 vendor/bin/phpunit --colors=always --teamcity
 
   phpcs:
     name: "PHP_CodeSniffer"
